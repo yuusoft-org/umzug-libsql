@@ -69,6 +69,8 @@ For example in the code blow, you will get a fresh database with all tables but 
 ```js
 import { createLibSqlUmzug } from "umzug-libsql";
 
+const umzug = createLibSqlUmzug();
+
 beforeEach(async () => {
   await umzug.down({
     to: 0,
@@ -87,9 +89,7 @@ import { Umzug } from "umzug";
 import { createClient } from '@libsql/client';
 import { LibSqlStorage, createLibSqlResolver } from "umzug-libsql";
 
-const client = createClient({
-  url: ':memory:'
-});
+const client = createClient();
 
 const storage = new LibSqlStorage(client);
 const resolver = createLibSqlResolver(client, { confirmBeforeDown: false });
@@ -103,6 +103,6 @@ const umzug = new Umzug({
   logger: console,
 });
 
-umzug.up();
+await umzug.up();
 
 ```
